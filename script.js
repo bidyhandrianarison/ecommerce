@@ -24,7 +24,13 @@ function genererProduits(produits)
         article.appendChild(price);
         //POUR LES BOUTONS
         const bouton=document.createElement('div');
-        bouton.className="boutons"
+        bouton.className="boutons";
+        const hiddenQuantity=document.createElement('div');
+        hiddenQuantity.innerHTML=`  <div class="quantity" style="display: none;">
+        <input type="number" class=subQuantity value="1" min="1">
+    </div>
+`
+        article.appendChild(hiddenQuantity);
         //AJOUTER AU PANIER
         const panier=document.createElement('button');
         panier.innerText="Ajouter au panier";
@@ -104,12 +110,39 @@ function afficherDetailProduits(produits){
     const prix=document.createElement('h3');
     prix.innerText=produits.price;
     secondColumn.appendChild(prix);
+    //TAILLE
+    const taille=document.createElement('p');
+    taille.innerText="Taille:"
+    const tailleDispo=produits.attributes.size;
+    taille.innerHTML+=`
+    <select  id="size">
+    </select>
+    `
+    secondColumn.appendChild(taille);
+    sectionDetails.appendChild(secondColumn);   
+    const size=document.querySelector("#size")
+    for(let i=0;i<tailleDispo.length;i++){
+        size.innerHTML+=`<option value="${tailleDispo[i]}">${tailleDispo[i]}</option>`
+    }
+    //COULEUR
+    const color=produits.attributes.color;
+    const colorSection=document.createElement('p');
+    colorSection.innerText="Couleur disponible: ";
+    colorSection.innerHTML+=`
+    <select  id="color">
+    </select>
+    `
+    secondColumn.appendChild(colorSection); 
+    const couleur=document.querySelector("#color");
+    for(let i=0;i<color.length;i++){
+        couleur.innerHTML+=`<option value="${color[i]}">${color[i]}</option>`
+    }; 
     const description =document.createElement('p');
     description.innerText=produits.description;
     secondColumn.appendChild(description);
     secondColumn.innerHTML+=`
                 <div class="quantity">
-                    <input type="number" id="quantity" value="1" min="1" max="${produits.stock}">
+                    <input type="number" class=subQuantity value="1" min="1" max="${produits.stock}">
                 </div>
     `
     //PANIER
@@ -119,7 +152,7 @@ function afficherDetailProduits(produits){
         ajouterPanier(produits);
     })
     secondColumn.appendChild(panier);
-    sectionDetails.appendChild(secondColumn);   
+    
  
 }
 //HAMBURGER
@@ -154,8 +187,8 @@ function ajouterPanier(produit){
     nom.innerText="Nom: " + produit.name;
     informations.appendChild(nom);
     const quantity=document.createElement("p");
-    const qte=document.querySelector("#quantity");
-    quantity.innerText="Quantité: " + qte.value;
+    const qte=document.querySelector(".subQuantity");
+    quantity.innerText="Quantité: "+ qte.value
     informations.appendChild(quantity);
     const taille=document.createElement('p');
     taille.innerText="Taille: ";
@@ -167,7 +200,7 @@ function ajouterPanier(produit){
     total.innerText="Total: "+ produit.price*qte.value;
     informations.appendChild(total);
     const bouton=document.createElement("button");
-    bouton.innerText="Continer vos achats";
+    bouton.innerText="Continuer vos achats";
     informations.appendChild(bouton);
     bouton.addEventListener('click',function(){
         container.style.display="none";

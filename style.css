@@ -56,6 +56,11 @@ main{
     width: 100%;
     background-color: white;
     padding: 5%;
+    overflow: hidden;
+}
+article:hover img{
+    transform: scale(1.025);
+    transition: 0.5s;
 }
 header{
     padding: 1%;
