@@ -3,9 +3,11 @@ alert("Le contenu pourrais-ne pas se charger correctement sans Live Server");
 const reponse= await fetch("online_store_extended.json");
 const informations=await reponse.json();
 const catalog=document.querySelector(".catalogue");
+const Cart=document.querySelector(".mainPanier");
 //FONCTION POUR GENERER LES PRODUITS AFIN D'EVITER LA REPETITION DE CREATION D'ELEMENT
 function genererProduits(produits)
 {
+    Cart.classList.add("notShowed")
     for(let i=0;i<produits.length;i++)
     {
         //CREATION D'UNE BALISE ARTICLE POUR METTRE UN PRODUIT
@@ -217,14 +219,18 @@ function ajouterPanier(produit){
 }
 function panier(prod,qte)
 {
+    Cart.classList.remove("notShowed");
     eraseContent(catalog);
     eraseContent(sectionDetails);
-    const pagePanier=document.querySelector(".panier");
+    const pagePanier=document.querySelector(".mainPanier");
     const container=document.createElement("div");
     container.className="contentPanier";
     const image=document.createElement("img");
     image.src=prod.image;
     container.appendChild(image);
+    const name=document.createElement("p");
+    name.innerText=prod.name;
+    container.appendChild(name);
     const quantity=document.createElement('p');
     quantity.innerText=qte;
     container.appendChild(quantity);
@@ -234,8 +240,17 @@ function panier(prod,qte)
     const suppr=document.createElement("button")
     suppr.innerText="Annuler";
     container.appendChild(suppr);
+    suppr.addEventListener('click',function(){
+        container.removeChild(suppr);
+        container.removeChild(total);
+        container.removeChild(quantity);
+        container.removeChild(name);
+        container.removeChild(image);
+        pagePanier.removeChild(container);
+    })
     pagePanier.appendChild(container);
 }
+
 //RETOUR A LA PAGE D'ACCUEIL
 document.querySelector('.home button').addEventListener('click',function(){
     eraseContent(catalog);

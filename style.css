@@ -116,7 +116,6 @@ input[type=submit],button{
     padding: 5%;
     justify-content: space-evenly;
     background-color: white;
- 
 }
 
 .details img{
@@ -150,6 +149,13 @@ input[type=submit],button{
     align-items: center;
     color: white;
     gap: 5%;
+}
+.mainPanier{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2%;
+    height: 100VH;
+
 }
 #nbreShopping{
     width: 10%;
@@ -195,11 +201,17 @@ input[type=submit],button{
     background-color: white;
     display: flex;
     width: 100%;
-    justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    left: 0;
-   }
+    justify-content: space-around;
+    align-items: center;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 0;*/
+    color: #006769;
+    height: 20vh;
+}
+.contentPanier img{
+    height:100% ;
+}
 /*RESPONSIVE DESIGN*/
 @media screen and (max-width: 955px) {
     .catalogue{
@@ -217,6 +229,9 @@ input[type=submit],button{
     }
     nav{
         justify-content: start;
+    }
+    .notShowed{
+        display: none !important;
     }
     .visible{
         display: block !important;
