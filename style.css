@@ -10,25 +10,28 @@ body{
     font-size: 5vh;
     color: #006769;
 }
-nav{
-    display: flex;
-    width: 100vw;
-    justify-content: space-around;
+.navContainer{
+    
     background-color:white;
-    align-items: center;
-    min-height: 50px;
-    flex-wrap: wrap;
     border: 1px solid #006769;
     color: #006769;
-
 }
-nav>* {
+.menuItems{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+nav>*{
+    cursor: pointer;
+}
+.menuItems>* {
     cursor: pointer;
     font-weight: 800;
     height: 100%;
     padding: 1%;
 }
-nav>*:hover{
+.menuItems>*:hover{
     background-color: #40A578;
     color: whitesmoke;
 }
@@ -42,7 +45,21 @@ body{
 }
 main{
     width: 100vw;
+    position: relative;
 }
+
+.navContainer{
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+.menuItems{
+    padding: 0;
+    margin: 0;
+   
+}
+
+
 .catalogue{
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -99,7 +116,6 @@ input[type=submit],button{
     padding: 5%;
     justify-content: space-evenly;
     background-color: white;
- 
 }
 
 .details img{
@@ -128,11 +144,26 @@ input[type=submit],button{
     margin: 0 5px;
 }
 .panier{
+    text-align: center;
+    justify-content: space-evenly;
     display: flex;
     height: max-content;
     align-items: center;
     color: white;
     gap: 5%;
+    border: 1px solid white;
+}
+.panier:hover{
+    cursor: pointer;
+    background-color: #40A578;
+}
+.mainPanier{
+    padding: 5% 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2%;
+    height: 100VH;
+
 }
 #nbreShopping{
     width: 10%;
@@ -174,6 +205,29 @@ input[type=submit],button{
     filter: brightness(50%);
     position: fixed;
    }
+   .contentPanier{
+    background-color: white;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 0;*/
+    color: #006769;
+    height: 20vh;
+}
+.contentPanier img{
+    height:100% ;
+}
+.notShowed{
+    display: none !important;
+}
+select{
+    
+  
+    padding: 2px;
+}
 /*RESPONSIVE DESIGN*/
 @media screen and (max-width: 955px) {
     .catalogue{
@@ -191,6 +245,21 @@ input[type=submit],button{
     }
     nav{
         justify-content: start;
+    }
+
+    .visible{
+        display: block !important;
+        text-align: left ;
+
+       
+        
+    }
+    .hamburgerItems{
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        background-color: white;  
+        z-index: 100000; 
     }
 }
 @media screen and (max-width: 768px) {
